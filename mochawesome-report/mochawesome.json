@@ -1,14 +1,14 @@
 {
   "stats": {
-    "suites": 1,
-    "tests": 1,
-    "passes": 1,
+    "suites": 2,
+    "tests": 2,
+    "passes": 2,
     "pending": 0,
     "failures": 0,
-    "start": "2018-05-12T15:56:36.033Z",
-    "end": "2018-05-12T15:56:36.148Z",
-    "duration": 115,
-    "testsRegistered": 1,
+    "start": "2018-05-12T16:34:36.112Z",
+    "end": "2018-05-12T16:34:36.381Z",
+    "duration": 269,
+    "testsRegistered": 2,
     "passPercent": 100,
     "pendingPercent": 0,
     "other": 0,
@@ -19,7 +19,7 @@
     "pendingPercentClass": "danger"
   },
   "suites": {
-    "uuid": "08aa7ce4-512c-4fb4-9e36-6d6198e5aeff",
+    "uuid": "4ec280e1-301d-4ef6-85da-0d0fc7f4ea38",
     "title": "",
     "fullFile": "",
     "file": "",
@@ -28,14 +28,14 @@
         "title": "\"before all\" hook",
         "fullTitle": "\"before all\" hook",
         "timedOut": false,
-        "duration": 30,
+        "duration": 28,
         "pass": false,
         "fail": false,
         "pending": false,
         "code": "//connects to mongoose database\nmongoose.connect('mongodb://localhost/testdb');\nmongoose.connection.once('open',()=>{\n    console.log('Congrats! Connected to Mongo DB');\n    done();\n}).on('error',()=>{\n    console.log('Connection error ',error);\n});",
         "err": {},
         "isRoot": true,
-        "uuid": "6f3e25bc-79a9-42b9-8927-218a06d6e427",
+        "uuid": "15a5df70-2f05-4571-afe5-4ec8e05734c7",
         "isHook": true,
         "skipped": false
       },
@@ -43,14 +43,14 @@
         "title": "\"before each\" hook",
         "fullTitle": "\"before each\" hook",
         "timedOut": false,
-        "duration": 3,
+        "duration": 2,
         "pass": false,
         "fail": false,
         "pending": false,
         "code": "mongoose.connection.collections.users.drop(()=>{\n    done();\n});",
         "err": {},
         "isRoot": true,
-        "uuid": "e453cd58-edc5-4378-a797-4e9e1c866216",
+        "uuid": "4c42dee5-b89d-40e2-a138-2bec370e9bba",
         "isHook": true,
         "skipped": false
       }
@@ -59,7 +59,7 @@
     "tests": [],
     "suites": [
       {
-        "uuid": "f3afdf3f-ee5d-4619-aed9-ef03c83872f7",
+        "uuid": "24b6073a-414a-4a54-9b78-67ace8a438cc",
         "title": "Saves a single record",
         "fullFile": "/Users/zac/Documents/api-testing/mongo-testing/mongo-db-unit/test/save_user.js",
         "file": "/test/save_user.js",
@@ -70,28 +70,82 @@
             "title": "saves a single record to db",
             "fullTitle": "Saves a single record saves a single record to db",
             "timedOut": false,
-            "duration": 69,
+            "duration": 73,
             "state": "passed",
             "speed": "medium",
             "pass": true,
             "fail": false,
             "pending": false,
-            "code": "var user = new User({\n    firstname : \"Akanksha\",\n    lastname : \"Verma\",\n    id : 123,\n    plan : \"GF\"\n});\nuser.save().then(()=>{\n   expect(user.isNew).to.be.false;\n    done();\n});",
+            "code": "var user = new User({\n    firstname : \"David\",\n    lastname : \"Bowie\",\n    id : 123,\n    plan : \"Mars Cries\"\n});\nuser.save().then(()=>{\n   expect(user.isNew).to.be.false;\n    done();\n});",
             "err": {},
             "isRoot": false,
-            "uuid": "f448eaa0-4e07-49f2-aa1f-0117c6da8fe5",
+            "uuid": "ff2ef300-7693-4e98-ad6e-12bd61cb08ed",
             "isHook": false,
             "skipped": false
           }
         ],
         "suites": [],
         "passes": [
-          "f448eaa0-4e07-49f2-aa1f-0117c6da8fe5"
+          "ff2ef300-7693-4e98-ad6e-12bd61cb08ed"
         ],
         "failures": [],
         "pending": [],
         "skipped": [],
-        "duration": 69,
+        "duration": 73,
+        "root": false,
+        "rootEmpty": false,
+        "_timeout": 50000
+      },
+      {
+        "uuid": "b721a813-34ac-4677-893b-92051ef26522",
+        "title": "It deletes a user",
+        "fullFile": "/Users/zac/Documents/api-testing/mongo-testing/mongo-db-unit/test/user_delete.js",
+        "file": "/test/user_delete.js",
+        "beforeHooks": [
+          {
+            "title": "\"before each\" hook",
+            "fullTitle": "It deletes a user \"before each\" hook",
+            "timedOut": false,
+            "duration": 65,
+            "pass": false,
+            "fail": false,
+            "pending": false,
+            "code": "user = new User({\n    firstname : \"Mike\",\n    lastname : \"Davids\",\n    id: 1245,\n    plan : \"Pricing\"\n});\nuser.save().then(()=>{\n    expect(user.isNew).to.be.false;\n    done();\n});",
+            "err": {},
+            "isRoot": false,
+            "uuid": "536c97f9-4b60-4666-823e-ba78c3cb27b0",
+            "isHook": true,
+            "skipped": false
+          }
+        ],
+        "afterHooks": [],
+        "tests": [
+          {
+            "title": "now deletes a record from the db",
+            "fullTitle": "It deletes a user now deletes a record from the db",
+            "timedOut": false,
+            "duration": 87,
+            "state": "passed",
+            "speed": "slow",
+            "pass": true,
+            "fail": false,
+            "pending": false,
+            "code": "User.findOneAndRemove({firstname : \"Mike\"}).then(()=>{\n    User.findOne({firstname : \"Mike\"}).then((result)=>{\n        expect(result).to.be.null;\n        done();\n    });\n});",
+            "err": {},
+            "isRoot": false,
+            "uuid": "8631025b-acaa-426b-94b3-588a2a4d1346",
+            "isHook": false,
+            "skipped": false
+          }
+        ],
+        "suites": [],
+        "passes": [
+          "8631025b-acaa-426b-94b3-588a2a4d1346"
+        ],
+        "failures": [],
+        "pending": [],
+        "skipped": [],
+        "duration": 87,
         "root": false,
         "rootEmpty": false,
         "_timeout": 50000
