@@ -7,10 +7,10 @@ var User = require('../user/user.js');
 describe('Saves a single record',()=>{
     it('saves a single record to db',(done)=>{
         var user = new User({
-            firstname : "Akanksha",
-            lastname : "Verma",
+            firstname : "David",
+            lastname : "Bowie",
             id : 123,
-            plan : "GF"
+            plan : "Mars Cries"
         });
         user.save().then(()=>{
            expect(user.isNew).to.be.false;
